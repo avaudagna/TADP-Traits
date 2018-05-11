@@ -1,6 +1,9 @@
+
+require_relative '../lib/trait/trait'
+require_relative '../lib/trait/trait_builder'
 require 'rspec'
-require '../lib/trait.rb'
-require '../lib/trait_builder'
+
+include RSpec
 
 describe Trait, '.define' do
 

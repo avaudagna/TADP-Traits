@@ -1,7 +1,9 @@
-require 'rspec'
-require '../lib/conflicts_chain.rb'
-require '../lib/conflict.rb'
 
+require_relative '../lib/trait/conflict/conflicts_chain'
+require_relative '../lib/trait/conflict/conflict'
+require 'rspec'
+
+include RSpec
 
 describe ConflictsChain, '#add_conflict' do
 

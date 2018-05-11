@@ -1,6 +1,8 @@
-require '../lib/module/trait_add'
-require '../lib/module/trait_remove'
-require '../lib/conflicts_chain'
+
+require_relative 'trait_add'
+require_relative 'trait_remove'
+require_relative 'conflict/conflict'
+require_relative 'conflict/conflicts_chain'
 
 class Trait
 
@@ -21,4 +23,11 @@ class Trait
     TraitBuilder.new.build(&schema)
   end
 
+  def is_conflicting?(method_name)
+    @conflicts_chain.exist_by_name?(method_name)
+  end
+
+  def conflict(method_name)
+    @conflicts_chain.get_conflict(method_name)
+  end
 end

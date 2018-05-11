@@ -1,4 +1,4 @@
-require '../lib/conflict'
+require_relative 'conflict'
 class ConflictsChain
 
   attr_accessor :conflicts
@@ -29,12 +29,22 @@ class ConflictsChain
     conflict_chain.conflicts.each do |some_conflict|
       add_conflict some_conflict
     end
+  end
 
-
+  def get_conflict(method_name)
+    if exist_by_name? method_name
+      @conflicts.find { |conflict| conflict.name.eql method_name }
+    end
   end
 
   def remove(name_method)
     @implementations.delete_if{ |element| element.name == name_method }
+  end
+
+  def exist_by_name?(method_name)
+    @conflicts.any? do |conflict|
+      conflict.name.eql? method_name
+    end
   end
 
   def exist?(some_conflict)

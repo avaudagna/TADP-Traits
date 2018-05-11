@@ -1,3 +1,4 @@
+
 class TraitBuilder
 
   attr_accessor :trait

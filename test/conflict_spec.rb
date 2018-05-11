@@ -1,6 +1,8 @@
-require 'rspec'
-require '../lib/conflict.rb'
 
+require_relative '../lib/trait/conflict/conflict'
+require 'rspec'
+
+include RSpec
 
 describe Conflict, '#add_implementations' do
 

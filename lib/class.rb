@@ -1,25 +1,33 @@
+
+require_relative 'trait/conflict/solver/default_conflict_strategy'
+
 class Class
 
   attr_accessor :strategy_by_conflict
+
+  def initialize
+    #uso la instancia singleton para que no haya mil de estos.
+    strategy_by_conflict = DefaultConflictStrategy.class
+  end
 
   def uses(trait)
     class_methods_name = methods
     trait_methods = trait.methods(false)
 
     trait_methods.each do |trait_method_name|
-      if class_methods_name.include?(trait_method_name)
-        # Se encuentra un conflicto de un metodo con el trait reducido
-        conflict = Conflict.new(trait_method_name, singleton_method(trait_method_name).to_proc)
-        trait.add_conflicting_method(conflict)
-      else
+      #new to the class
+      if !class_methods_name.include?(trait_method_name)
         inject(trait_method_name, trait)
       end
-      # Resolver conflicto por metodo
-      strategy_by_conflict.call(trait_method_name)
     end
   end
 
   def inject(method_name, trait)
-    define_method(method_name, trait.singleton_method(method_name).to_proc)
+    if trait.is_conflicting? method_name
+      define_method(method_name,
+                    strategy_by_conflict.call(trait.conflict(trait_method_name)))
+    else
+      define_method(method_name, trait.singleton_method(method_name).to_proc)
+    end
   end
 end
