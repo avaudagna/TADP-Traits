@@ -1,6 +1,7 @@
 
 require_relative 'trait_add'
 require_relative 'trait_remove'
+require_relative 'trait_alias'
 require_relative 'conflict/conflict'
 require_relative 'conflict/conflicts_chain'
 
@@ -8,6 +9,7 @@ class Trait
 
   include TraitAdd
   include TraitRemove
+  include TraitAlias
 
   attr_accessor :conflicts_chain
 
@@ -39,8 +41,5 @@ class Trait
     conflicts_chain.get_conflict(method_name)
   end
 
-  def <<(symbol_to_rename)
-    alias_method symbol_to_rename.original_symbol,
-                 symbol_to_rename.final_symbol
-  end
+
 end
