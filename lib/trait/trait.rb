@@ -14,9 +14,12 @@ class Trait
   attr_accessor :conflicts_chain
 
   def initialize
-    conflicts_chain = ConflictsChain.new
+    @conflicts_chain = ConflictsChain.new
   end
 
+  def conflicts_chain
+    @conflicts_chain
+  end
   def merge_conflict_chain(other_conflict_chain)
     @conflicts_chain.merge other_conflict_chain
   end

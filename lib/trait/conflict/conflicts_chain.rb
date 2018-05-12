@@ -7,6 +7,10 @@ class ConflictsChain
     @conflicts = []
   end
 
+  def conflicts
+    @conflicts
+  end
+
   def size
     @conflicts.count
   end
@@ -22,7 +26,7 @@ class ConflictsChain
         some_conflict.add_implementations(other_conflict.implementations)
       end
     end
-    conflicts.push merged_conflict
+    @conflicts = ([merged_conflict] << conflicts).flatten
   end
 
   def merge(conflict_chain)
