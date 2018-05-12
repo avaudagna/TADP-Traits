@@ -10,9 +10,9 @@ class FoldConflictStrategy
   end
 
   def solve(conflict)
-   conflict.implementations
+   Proc.new {conflict.implementations
         .inject(conflict.implementations[0]) do |accumulated, implementation|
       accumulated.folding_function(implementation.call)
-    end
+    end}
   end
 end
