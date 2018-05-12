@@ -10,7 +10,7 @@ class PredicateConflictStrategy
   end
 
   def solve(conflcit)
-    Proc.new { conflcit.implementations.detect do |implementation|
+    Proc.new {conflcit.implementations.detect do |implementation|
       evaluator.call(implementation)
     end}
   end

@@ -1,9 +1,8 @@
-
 # Raises a ConflictingMethodError.
 class DefaultConflictStrategy
 
   def solve(conflict)
-    Porc.new { ConflictingMethodError.new }
+    Proc.new {raise ConflictingMethodError}
   end
 
 end
