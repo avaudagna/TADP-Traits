@@ -35,9 +35,8 @@ class Trait
     @conflicts_chain.get_conflict(method_name)
   end
 
-  def << (symbol_to_rename)
-    alias_method symbol_to_rename.original_symbol,
-                 symbol_to_rename.final_symbol
-    remove_method symbol_to_rename.original_symbol
+  def <<(symbol_to_rename)
+    alias_method(symbol_to_rename.original_symbol,symbol_to_rename.final_symbol)
+    remove_method(symbol_to_rename.original_symbol)
   end
 end
