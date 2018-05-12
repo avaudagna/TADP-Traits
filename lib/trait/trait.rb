@@ -15,6 +15,10 @@ class Trait
     conflicts_chain = ConflictsChain.new
   end
 
+  def merge_conflict_chain(other_conflict_chain)
+    @conflicts_chain.merge other_conflict_chain
+  end
+
   def add_conflicting_method(conflict)
     conflicts_chain.add_conflict conflict
   end
