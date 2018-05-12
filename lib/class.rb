@@ -11,9 +11,17 @@ class Class
   end
 
   def uses(trait)
+    add_non_conflicting(trait)
+    solve_and_add_conflicting(trait)
+  end
+
+  def solve_and_add_conflicting(trait)
+    #trait.conflicts_chain.
+  end
+
+  def add_non_conflicting(trait)
     class_methods_name = methods
     trait_methods = trait.methods(false)
-
     trait_methods.each do |trait_method_name|
       #new to the class
       if !class_methods_name.include?(trait_method_name)
@@ -23,9 +31,9 @@ class Class
   end
 
   def inject(method_name, trait)
-    if trait.is_conflicting? method_name
+    if trait.conflicting? method_name
       define_method(method_name,
-                    strategy_by_conflict.solve(trait.conflict(trait_method_name)))
+      strategy_by_conflict.solve(trait.conflict(trait_method_name)))
     else
       define_method(method_name, trait.singleton_method(method_name).to_proc)
     end
