@@ -5,10 +5,11 @@ module TraitAdd
     final_trait.merge other.conflicts_chain
     final_trait.merge conflicts_chain
     final_trait.add_all_methods_non_conflicting(self, other)
+    #TODO Agregar los metodos conflictivos resultantes de la suma (ALAN)
   end
 
-
   def add_all_methods_non_conflicting(some_trait, other_trait)
+    #FIXME: Ver diferencia asimetrica
     add_methods_non_conflicting_left_join(some_trait, other_trait)
     add_methods_non_conflicting_left_join(other_trait, some_trait)
   end

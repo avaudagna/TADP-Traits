@@ -12,28 +12,28 @@ class Trait
   attr_accessor :conflicts_chain
 
   def initialize
-    @conflicts_chain = ConflictsChain.new
+    conflicts_chain = ConflictsChain.new
   end
 
   def add_conflicting_method(conflict)
-    @conflicts_chain.add_conflict conflict
+    conflicts_chain.add_conflict conflict
   end
 
   def self.define(&schema)
     TraitBuilder.new.build(&schema)
   end
 
-  def is_conflicting?(method_name)
-    @conflicts_chain.exist_by_name?(method_name)
+  def conflicting?(method_name)
+    conflicts_chain.exist_by_name?(method_name)
   end
 
+  #CAMBIAR
   def conflict(method_name)
-    @conflicts_chain.get_conflict(method_name)
+    conflicts_chain.get_conflict(method_name)
   end
 
-  def << (symbol_to_rename)
+  def <<(symbol_to_rename)
     alias_method symbol_to_rename.original_symbol,
                  symbol_to_rename.final_symbol
-    remove_method symbol_to_rename.original_symbol
   end
 end
