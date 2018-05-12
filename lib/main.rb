@@ -14,7 +14,7 @@ def init()
     end
   end
   Trait.define do
-    name :TraitB
+    name :TraitA2
     method :metodo1 do
       "Chau"
     end
@@ -22,4 +22,24 @@ def init()
       un_numero * 0 + 50
     end
   end
+  Trait.define do
+    name :TraitB
+    method :metodo3 do |un_numero|
+      un_numero * 0 + 50
+    end
+  end
 end
+
+def trait_adding()
+  non_conflict_sum(TraitA, TraitB)
+  simple_conflict_sum(TraitA, TraitA2)
+end
+
+def simple_conflict_sum(one_trait, other_trait)
+  one_trait + other_trait
+end
+
+def non_conflict_sum(one_trait, other_trait)
+  one_trait + other_trait
+end
+
