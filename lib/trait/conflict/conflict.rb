@@ -8,15 +8,7 @@ class Conflict
   end
 
   def add_implementations(new_implementations = [])
-    @implementations += new_implementations
-  end
-
-  def implementations
-    @implementations
-  end
-
-  def name
-    @name
+    @implementations.push(*new_implementations)
   end
 
 end

@@ -22,11 +22,12 @@ class ConflictsChain
     end
     if matched_conflicts.any? then
       @conflicts -= matched_conflicts
-      merged_conflict = matched_conflicts.inject do |some_conflict, other_conflict|
-        some_conflict.add_implementations(other_conflict.implementations)
+      merged_conflict = conflict
+      matched_conflicts.each do |some_conflict|
+        merged_conflict.add_implementations(some_conflict.implementations)
       end
     end
-    @conflicts = ([merged_conflict] << conflicts).flatten
+    @conflicts << merged_conflict
   end
 
   def merge(conflict_chain)
@@ -37,7 +38,7 @@ class ConflictsChain
 
   def get_conflict(method_name)
     if exist_by_name? method_name
-      @conflicts.find { |conflict| conflict.name.eql method_name }
+      @conflicts.find { |conflict| conflict.name == method_name }
     end
   end
 

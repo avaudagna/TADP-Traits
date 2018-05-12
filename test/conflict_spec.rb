@@ -13,7 +13,7 @@ describe Conflict, '#add_implementations' do
     conflict = Conflict.new(:method1, list_implementations)
     conflict.add_implementations list_implementations
     expect(conflict.implementations.size).to be 2
-    expect(conflict.implementations).to eq(list_implementations + list_implementations)
+    expect(conflict.implementations).to eq(list_implementations.push(*list_implementations))
 
 
   end
