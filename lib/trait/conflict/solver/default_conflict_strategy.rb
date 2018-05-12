@@ -1,10 +1,13 @@
-module DefaultConflictStrategy
 
-  def solve(method_name, implementations)
-    conflictingMethodException
+# Raises a ConflictingMethodError.
+class DefaultConflictStrategy
+
+  def solve(conflict)
+    Porc.new { ConflictingMethodError.new }
   end
 
-  def conflictingMethodException
-    raise ConflictingMethodError.new
-  end
+end
+
+class ConflictingMethodError < StandardError
+
 end

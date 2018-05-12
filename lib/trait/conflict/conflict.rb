@@ -11,4 +11,12 @@ class Conflict
     @implementations += new_implementations
   end
 
+  def implementations
+    @implementations
+  end
+
+  def name
+    @name
+  end
+
 end
