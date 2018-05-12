@@ -3,7 +3,7 @@
 class DefaultConflictStrategy
 
   def solve(conflict)
-    Porc.new { ConflictingMethodError.new }
+    ConflictingMethodError.new
   end
 
 end
