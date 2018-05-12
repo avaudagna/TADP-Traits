@@ -12,7 +12,7 @@ class Trait
   attr_accessor :conflicts_chain
 
   def initialize
-    conflicts_chain = ConflictsChain.new
+    @conflicts_chain = ConflictsChain.new
   end
 
   def conflicts_chain
