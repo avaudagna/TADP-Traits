@@ -25,7 +25,7 @@ class Class
   def inject(method_name, trait)
     if trait.is_conflicting? method_name
       define_method(method_name,
-                    strategy_by_conflict.call(trait.conflict(trait_method_name)))
+                    strategy_by_conflict.solve(trait.conflict(trait_method_name)))
     else
       define_method(method_name, trait.singleton_method(method_name).to_proc)
     end
