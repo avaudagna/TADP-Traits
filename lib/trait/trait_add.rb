@@ -20,8 +20,13 @@ module TraitAdd
   def add_all_non_conflicting_methods_left_join(one_trait, other_trait)
     other_trait_methods_only = other_trait.methods(false) - one_trait.methods(false)
     other_trait_methods_only.each do |method_name|
-      send(:define_singleton_method, method_name,
-           other_trait.singleton_method(method_name).to_proc)
+      if(conflicts_chain.exist_by_name?(method_name))
+        conflicts_chain.add_conflict(Conflict.new(method_name,
+                [other_trait.singleton_method(method_name).to_proc]))
+      else
+        send(:define_singleton_method, method_name,
+             other_trait.singleton_method(method_name).to_proc)
+      end
     end
   end
 end
